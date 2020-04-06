@@ -1,3 +1,31 @@
+--Exercise 1 
+
+SELECT * FROM LOCATIONS;
+DESC LOCATIONS;
+DESC EMPLOYEES;
+
+SELECT EMPLOYEE_ID AS "Emp#",  
+       first_name || ' ' || last_name AS "Full Name",
+       JOB_ID AS "Job Title",
+       department_id AS "Department ID"
+FROM EMPLOYEES;
+
+SELECT DISTINCT JOB_ID FROM EMPLOYEES;
+
+SELECT first_name || ' ' || last_name AS "Full Name",
+       'Phone: '|| PHONE_NUMBER || ' Email: ' || EMAIL AS "Contact Details"
+FROM EMPLOYEES;
+
+DESC HOTEL;
+
+SELECT * FROM HOTEL;
+SELECT * FROM GUEST;
+SELECT * FROM ROOM WHERE TYPE='S';
+SELECT * FROM GUEST WHERE guestcity='London';
+SELECT * FROM BOOKING WHERE DATETO=NULL;
+
+--Exercise 2
+
 DESCRIBE employees;
 
 SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", JOB_ID AS "Job Title", salary FROM employees 
