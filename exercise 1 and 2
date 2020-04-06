@@ -34,11 +34,12 @@ WHERE SALARY > = 10000;
 SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", JOB_ID AS "Job Title", salary FROM employees 
 WHERE SALARY NOT BETWEEN 5000 AND 12000;
 
-SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", JOB_ID AS "Job Title", salary FROM employees 
-WHERE SALARY > = 10000;
-
 SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", JOB_ID AS "Job Title", hire_date FROM employees 
 WHERE first_name IN ('Alyssa', 'David') AND last_name IN ('Hutton', 'Austin');
+
+--or easier way like this:
+SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", JOB_ID AS "Job Title", hire_date FROM employees 
+WHERE last_name IN ('Hutton', 'Austin');
 
 DESC LOCATIONS;
 
