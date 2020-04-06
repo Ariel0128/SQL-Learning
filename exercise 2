@@ -1,0 +1,49 @@
+DESCRIBE employees;
+
+SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", JOB_ID AS "Job Title", salary FROM employees 
+WHERE SALARY > = 10000;
+
+SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", JOB_ID AS "Job Title", salary FROM employees 
+WHERE SALARY NOT BETWEEN 5000 AND 12000;
+
+SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", JOB_ID AS "Job Title", salary FROM employees 
+WHERE SALARY > = 10000;
+
+SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", JOB_ID AS "Job Title", hire_date FROM employees 
+WHERE first_name IN ('Alyssa', 'David') AND last_name IN ('Hutton', 'Austin');
+
+DESC LOCATIONS;
+
+SELECT street_address, postal_code, city, country_id FROM LOCATIONS
+WHERE country_id IN ('IT', 'JP');
+
+SELECT hire_date FROM employees;
+
+SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", 'Phone: '||phone_number||' Email: '||email AS "Contact Details", 
+hire_date FROM employees 
+WHERE hire_date LIKE '%JAN-96'
+ORDER BY last_name;
+
+SELECT SYSDATE FROM DUAL;
+
+SELECT FIRST_NAME||' '||LAST_NAME AS "Full Name", 'Phone: '||phone_number||' Email: '||email AS "Contact Details", 
+hire_date FROM employees 
+WHERE hire_date > = '01-DEC-99'
+ORDER BY hire_date DESC;
+
+SELECT first_name FROM employees
+WHERE first_name LIKE 'S%n';
+
+SELECT first_name, JOB_ID FROM employees
+WHERE job_id IN ('AC_MGR', 'AD_VP', 'FI_MGR', 'HR_REP', 'PR_REP');
+
+SELECT first_name, JOB_ID FROM employees
+WHERE job_id NOT IN ('AC_MGR', 'AD_VP', 'FI_MGR', 'HR_REP', 'PR_REP');
+
+SELECT employee_id, last_name, salary, department_id, manager_id
+FROM employees;
+/* to have a look at the id*/
+
+SELECT employee_id, last_name, salary, department_id
+FROM employees
+WHERE manager_id = &&manager_num;
