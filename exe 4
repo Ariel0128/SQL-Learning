@@ -1,0 +1,74 @@
+select last_name ||', '|| first_name as "Full Name", 
+    lower(email) ||'@megacorp.com' as "Email" 
+from employees
+order by last_name;
+
+---the variable in nvl function must be char----
+select last_name as "LAST_NAME",
+    'NZD '|| to_char(salary,'99,999') as "Salary",
+    lpad(nvl(to_char(commission_pct),0),15) as "Commission %",
+    lpad(nvl(to_char(salary * commission_pct),'No Commission'),15) as "Commission"
+from employees
+order by last_name;
+
+----上一个lab里想改的日期格式----
+select to_char(end_date,'dd/mm/yy') from job_history;
+
+select first_name ||' '|| last_name as "Full Name",
+    length(first_name)+length(last_name) ||' Char.' as "Name Length",
+    to_char(hire_date,'DAY') as "Hire Day",
+    to_char(hire_date,'fmDD Month YYYY') as "Hire Date"
+from employees
+where commission_pct is not null
+    and job_id != 'SA_MAN';
+
+select first_name ||' '|| last_name as "Full Name",
+    job_id as "Job Title",
+    lower(email)||'@megacorp.com' as "Email"
+from employees
+where lower(first_name) = lower('&First_Name');
+
+select min(salary), max(salary), round(avg(salary),2), round(stddev(salary),2)
+from employees;
+
+select job_id, count(*)
+from employees
+group by job_id
+order by count(job_id) desc;
+
+select min(salary), max(salary), round(avg(salary),2), round(stddev(salary),2)
+from employees
+where department_id = 80;
+
+select d.department_id as "Department No",
+    d.department_name as "Department Name",
+    round(avg(e.salary),2) as "Average Salary"
+from departments d, employees e
+where e.department_id = d.department_id
+group by d.department_id, d.department_name
+order by avg(e.salary) desc;
+
+select d.department_id as "Department No",
+    d.department_name as "Department Name",
+    round(avg(e.salary),2) as "Average Salary"
+from departments d, employees e
+where e.department_id = d.department_id
+group by d.department_id, d.department_name
+having avg(e.salary) > 6000
+order by avg(e.salary) desc;
+
+select e.first_name||' '||e.last_name as "Full Name",
+    j.job_title as "Job Title",
+    d.department_name as "Department Name",
+    to_char(jh.start_date,'dd/mm/yy') as "Start Date",
+    to_char(jh.end_date,'dd/mm/yy') as "End Date",
+    trunc((jh.end_date - jh.start_date)/30,0) as "# Months in Position"
+    --- or months_between(jh.end_date,jh.start_date)-----
+from employees e, departments d, jobs j, job_history jh
+where j.job_id = jh.job_id
+    and jh.department_id = d.department_id
+    and e.employee_id = jh.employee_id
+    ;
+    
+
+
