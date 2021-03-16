@@ -1,0 +1,19 @@
+#Join codes - do it later
+join_ptnt <- sqldf("select patientnotes.pmid, enroll.PatientId, patientnotes.[Note.Created.On] 
+      from patientnotes
+      join enroll on patientnotes.pmid= enroll.pmid ")
+
+#----------------------------------------------
+
+#data cleaning/filtering: remove those unuseful features
+write.csv(enroll,file = "filename")
+enroll <- sqldf("select * from enroll where CurrentStatus= 'Ceased' or CurrentStatus= 'Complete' or CurrentStatus= 'Enrolled'")
+enroll_cc <- sqldf("select * from enroll where CurrentStatus= 'Ceased' or CurrentStatus= 'Complete' ")
+interventions_call <- sqldf("select * from interventions where InteractionType= 'Contact Centre' or InteractionType= 'NULL' ")
+
+#text join - concat all the text of the same pt
+textjoin <- sqldf("select pmid, group_concat(Description) as ptnote from patientnotes group by pmid")
+#join the label/class to the table above
+textjoin <- sqldf("select textjoin.pmid, textjoin.ptnote, enroll.CurrentStatus
+                  from textjoin
+                  join enroll on textjoin.pmid=enroll.pmid")
